@@ -51,30 +51,28 @@ profile.innerHTML=`
 </div>
 <div class="profile-follower">
 <div class="profile-repository">
-<p><i class="fa-solid fa-user-group"></i> ${data.public_repos}||"N/A"</p>
+<p><i class="fa-solid fa-user-group"></i> ${data.public_repos||"N/A"}|</p>
 <P>Repositories</p>
 
 </div>
 <div class="profile-followers">
-<p><i class="fa-solid fa-user-group"></i> ${data.followers}||"N/A"</p>
+<p><i class="fa-solid fa-user-group"></i> ${data.followers||"N/A"}|</p>
 <P>followers</p>
 </div>
 
 </div>
 <div class="profile-following">
-<p><i class="fa-solid fa-user-group"></i> ${data.following}||"N/A"</p>
+<p><i class="fa-solid fa-user-group"></i> ${data.following||"N/A"}</p>
 <P>following</p>
 </div>
 <div class="profile-gists">
-<p><i class="fa-regular fa-star"></i> ${data.public_gists}||"N/A"</p>
+<p><i class="fa-regular fa-star"></i> ${data.public_gists||"N/A"}</p>
 <P>Gists</p>
 </div>
 <a href=${data.html_url}>view profile</a>
-
 </div>
-
-
 `
+
 } catch (error) {
    errorEle.textContent=error.message
 }
