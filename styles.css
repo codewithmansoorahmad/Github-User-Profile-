@@ -4,7 +4,8 @@
     padding: 0;
 }
 :root{
-    --primary:#3C5ECF
+    --primary:#3C5ECF;
+    --secondary:#309CC0
 
 }
 body{
@@ -71,6 +72,16 @@ body{
 }
 .profile-img{
     width: 300px;
+}
+.user-img{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+   
+}
+.img{
+    font-size: 28px;
+
 }
 .error{
     color: red;
