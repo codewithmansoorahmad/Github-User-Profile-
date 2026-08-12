@@ -94,3 +94,77 @@ body{
     transform: rotate(360deg);
   }
 }
+
+#profile{
+    position: relative;
+/* top: 50px; */
+/* left: 50px; */
+padding: 20px;
+}
+#full-profile{
+     width: 80%;
+    background-color: #615e5e;
+    margin: auto;
+}
+.img-profile{
+    display: flex;
+    gap: 40px;
+}
+.profile-details{
+    font-size: 26px;
+
+
+}
+.view-profile{
+    position: relative;
+}
+.view-profile a {
+    color: white;
+    font-size: 18px;
+    font-weight: 400;
+
+    text-decoration: none;
+}
+.icon{
+    font-size: 14px;
+    font-weight: 400;
+
+}
+.view-profile{
+border: 1px solid rgb(122, 112, 112);
+    color: white;
+       position: absolute;
+    left: 80%;
+    top: 2%;
+   width: 160px;
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   justify-content: center;
+    
+}
+.profile-repo-card{
+    display: grid;
+grid-template-columns: repeat(4,1fr);
+border: 1px solid rgb(31, 28, 28);
+width: 600px;
+margin-left: 25%;
+}
+.profile-repo-card div{
+     padding: 15px;
+    text-align: center;
+    border-right: 1px solid #777;
+
+}
+.profile-repo-card:last-child{
+    border: none;
+}
+.profile-repo-card .icon{
+    color: rgb(79, 238, 79);
+    font-size: 22px;
+}
+.profile-repo-card .icon-star{
+    color: yellow;
+    font-size: 22px;
+
+}

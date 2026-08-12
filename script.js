@@ -5,6 +5,7 @@ const repository=document.querySelector("#repos")
 const loading=document.querySelector(".loading")
 const errorEle=document.querySelector(".error")
 let isBool=false;
+
 searchBtn.addEventListener("click",function(){
     profile.innerHTML=""
     repository.innerHTML=""
@@ -42,44 +43,10 @@ if(isBool){
 if(!response.ok){
     throw new Error("User not found with this name")
 }
-console.log(data)
-profile.innerHTML=`
-<img class="user-img" src=${data.avatar_url} >
-<div class="profile-details">
-<div class="view-profile">
-<p>${data.name||""}</p>
-<a href=${data.html_url}>view profile</a>
-</div>
-
-<p>${data.login||""}</p>
-<p>${data.company||"NO company "}</p>
-<p>${data.bio||"No Bio Added "}</p>
-<p><i class="fa-solid fa-location-dot"></i> ${data.location||"N/A"}</p>
-<p>joined: ${new Date(data.created_at).toLocaleDateString()||"N/A"}</p>
-</div>
-<div class="profile-follower">
-<div class="profile-repository">
-<p><i class="fa-solid fa-user-group"></i> ${data.public_repos||"N/A"}</p>
-<P>Repositories</p>
-
-</div>
-<div class="profile-followers">
-<p><i class="fa-solid fa-user-group"></i> ${data.followers||"N/A"}</p>
-<P>followers</p>
-</div>
-
-</div>
-<div class="profile-following">
-<p><i class="fa-solid fa-user-group"></i> ${data.following||"N/A"}</p>
-<P>following</p>
-</div>
-<div class="profile-gists">
-<p><i class="fa-regular fa-star"></i> ${data.public_gists||"N/A"}</p>
-<P>Gists</p>
-</div>
-<a href=${data.html_url}>view profile</a>
-</div>
-`
+if(!localStorage.getItem("githubUser")){
+    localStorage.setItem("githubUser",JSON.stringify(data))
+}
+getUserProfile(data)
 if(data.repos_url){
 
 getRepos(data)
@@ -94,10 +61,56 @@ getRepos(data)
 
     
 }
+
+function getUserProfile(data){
+profile.innerHTML=`
+<div class="img-profile">
+<img class="user-img" src=${data.avatar_url} >
+<div class="profile-details">
+<p>${data.name||""}</p>
+<div class="view-profile">
+
+<a href=${data.html_url}>view profile
+<i class="fa-solid fa-arrow-up-right-from-square icon"></i>
+</a>
+</div>
+
+<p>${data.login||""}</p>
+<p>${data.company||"NO company "}</p>
+<p>${data.bio||"No Bio Added "}</p>
+<p><i class="fa-solid fa-location-dot"></i> ${data.location||"N/A"}</p>
+<p>joined: ${new Date(data.created_at).toLocaleDateString()||"N/A"}</p>
+</div>
+</div>
+
+<div class="profile-repo-card">
+<div class="profile-repository">
+<p><i class="fa-solid fa-user-group icon"></i> ${data.public_repos||"N/A"}</p>
+<P>Repositories</p>
+
+</div>
+<div class="profile-followers">
+<p><i class="fa-solid fa-user-group icon"></i> ${data.followers||"N/A"}</p>
+<P>followers</p>
+</div>
+
+<div class="profile-following">
+<p><i class="fa-solid fa-user-group icon"></i> ${data.following||"N/A"}</p>
+<P>following</p>
+</div>
+<div class="profile-gists">
+<p><i class="fa-regular fa-star icon-star"></i> ${data.public_gists||"N/A"}</p>
+<P>Gists</p>
+</div>
+</div>
+
+`
+}
+
+
 const getRepos=async(data)=>{
     let repos=await fetch(data.repos_url);
 repos=await repos.json()
-console.log(repos)
 repos.forEach((item=>{
     console.log(item)
      repository.innerHTML+=`
@@ -116,4 +129,10 @@ updated_at).toLocaleDateString()}`:""}</p>
      `
 }))
 
+}
+const savedData=localStorage.getItem("githubUser")
+if(savedData){
+    const data=JSON.parse(savedData)
+    getUserProfile(data)
+    getRepos(data)
 }
